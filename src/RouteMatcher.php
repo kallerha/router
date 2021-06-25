@@ -6,6 +6,7 @@ namespace FluencePrototype\Router;
 
 use FluencePrototype\Cache\Cache;
 use FluencePrototype\Filesystem\Filesystem;
+use FluencePrototype\Http\HttpUrl;
 use FluencePrototype\Http\Messages\iRequest;
 
 /**
@@ -179,6 +180,13 @@ class RouteMatcher implements iRouteMatcher
                     if ($routeInformationArray['isFile'] === $isFile) {
                         return $routeInformationArray;
                     }
+
+                    $currentUrl = HttpUrl::createFromCurrentUrl();
+
+                    header(header: 'HTTP/1.1 301 Moved Permanently');
+                    header(header: 'Location: ' . $currentUrl . (!$routeInformationArray['isFile'] && $routeInformationArray['isFile'] !== '' ? '/' : ''));
+
+                    exit;
                 }
             }
         }
