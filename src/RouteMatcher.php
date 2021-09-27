@@ -108,7 +108,7 @@ class RouteMatcher implements iRouteMatcher
 
         $pathArrayPopped = array_pop(array: $pathArray);
 
-        if ($pathArrayPopped) {
+        if ($pathArrayPopped !== null) {
             $firstLetter = substr(string: $pathArrayPopped, offset: 0, length: 1);
 
             if (isset($routeCache[':']) || isset($routeCache[$firstLetter])) {
