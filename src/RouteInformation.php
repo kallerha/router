@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FluencePrototype\Router;
 
 use ReflectionClass;
+use ReflectionException;
 
 /**
  * Class RouteInformation
@@ -78,10 +79,11 @@ class RouteInformation implements iRouteInformation
 
     /**
      * @inheritDoc
+     * @throws ReflectionException
      */
-    public static function createFromArray(array $routeInformationArray): ?RouteInformation
+    public static function createFromArray(array $routeInformationArray): null|RouteInformation
     {
-        return (new ReflectionClass(objectOrClass: self::class))->newInstanceArgs(args: $routeInformationArray);
+        return (new ReflectionClass(objectOrClass: RouteInformation::class))->newInstanceArgs(args: $routeInformationArray);
     }
 
 }

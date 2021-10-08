@@ -17,6 +17,6 @@ interface iRouteMatcher
      * @param iRequest $request
      * @return array|null
      */
-    public function matchRouteWithRequestPath(iRequest $request): ?array;
+    public function matchRouteWithRequestPath(iRequest $request): null|array;
 
 }

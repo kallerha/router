@@ -40,6 +40,6 @@ interface iRouteInformation
      * @param array $routeInformationArray
      * @return RouteInformation|null
      */
-    public static function createFromArray(array $routeInformationArray): ?RouteInformation;
+    public static function createFromArray(array $routeInformationArray): null|RouteInformation;
 
 }

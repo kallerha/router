@@ -33,7 +33,7 @@ class Route implements iRoute
             throw new InvalidRouteNameException();
         }
 
-        if (substr($path, 0, 1) === '/' || substr($path, -1, 1) === '/') {
+        if (str_starts_with(haystack: $path, needle: '/') || substr($path, offset: -1, length: 1) === '/') {
             throw new InvalidRoutePathException();
         }
 

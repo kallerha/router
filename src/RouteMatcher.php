@@ -21,7 +21,7 @@ class RouteMatcher implements iRouteMatcher
      * @param string $requestPath
      * @return array|null
      */
-    private function evaluateRouteCandidates(string $requestPath, array $routeCandidates): ?array
+    private function evaluateRouteCandidates(string $requestPath, array $routeCandidates): null|array
     {
         $requestPathArray = explode(separator: '/', string: $requestPath);
         $requestPathArrayLength = count(value: $requestPathArray);
@@ -40,11 +40,11 @@ class RouteMatcher implements iRouteMatcher
                 $requestPathItem = $requestPathArray[$j];
                 $routeCandidatePathItem = $routeCandidatePathArray[$j];
 
-                if ($requestPathItem === $routeCandidatePathItem && substr(string: $requestPathItem, offset: 0, length: 1) !== ':' && $isParameterArray[$j]) {
+                if ($requestPathItem === $routeCandidatePathItem && !str_starts_with(haystack: $requestPathItem, needle: ':') && $isParameterArray[$j]) {
                     $isParameterArray[$j] = false;
                 }
 
-                if (substr($routeCandidatePathItem, 0, 1) === ':') {
+                if (str_starts_with(haystack: $routeCandidatePathItem, needle: ':')) {
                     if ($minRouteCandidateParametersLength > $routeCandidateParametersLength) {
                         $minRouteCandidateParametersLength = $routeCandidateParametersLength;
                     }
@@ -81,7 +81,7 @@ class RouteMatcher implements iRouteMatcher
                 $routeCandidatePathItem = $routeCandidatePathArray[$j];
                 $isParameterItem = $isParameterArray[$j];
 
-                if (substr(string: $routeCandidatePathItem, offset: 0, length: 1) === ':' && !$isParameterItem) {
+                if (str_starts_with(haystack: $routeCandidatePathItem, needle: ':') && !$isParameterItem) {
                     unset($routeCandidatesFiltered[$i]);
                 }
             }
@@ -147,7 +147,7 @@ class RouteMatcher implements iRouteMatcher
     /**
      * @inheritDoc
      */
-    public function matchRouteWithRequestPath(iRequest $request): ?array
+    public function matchRouteWithRequestPath(iRequest $request): null|array
     {
         $routeCache = $this->getRouteCache();
         $requestSubdomain = $request->getSubdomain();
