@@ -13,10 +13,10 @@
   ],
   "require": {
     "php": ">=8.0.0",
-    "fluence-prototype/auth": "^1.0",
-    "fluence-prototype/cache": "^1.0",
-    "fluence-prototype/filesystem": "^1.0",
-    "fluence-prototype/http": "^1.0"
+    "fluence-prototype/auth": "^2.0",
+    "fluence-prototype/cache": "^2.0",
+    "fluence-prototype/filesystem": "^2.0",
+    "fluence-prototype/http": "^2.0"
   },
   "autoload": {
     "psr-4": {
