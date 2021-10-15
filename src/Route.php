@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace FluencePrototype\Router;
 
 use Attribute;
-use FluencePrototype\Auth\AcceptRoles;
-use ReflectionAttribute;
-use ReflectionClass;
-use ReflectionException;
 
 /**
  * Class Route
@@ -79,26 +75,6 @@ class Route implements iRoute
         return $this->isFile;
     }
 
-    private function getRoles(string $controller): array
-    {
-        try {
-            $controllerClass = new ReflectionClass(objectOrClass: $controller);
-            $controllerClassAttributes = $controllerClass->getAttributes(name: AcceptRoles::class);
-
-            if (!empty($controllerClassAttributes)) {
-                /** @var ReflectionAttribute $acceptRolesAttribute */
-                $acceptRolesAttribute = array_pop(array: $controllerClassAttributes);
-                $acceptRolesAttributeParameters = $acceptRolesAttribute->getArguments();
-                $roles = array_pop(array: $acceptRolesAttributeParameters);
-
-                return $roles;
-            }
-        } catch (ReflectionException) {
-        }
-
-        return [];
-    }
-
     /**
      * @inheritDoc
      */
@@ -123,8 +99,7 @@ class Route implements iRoute
                 'name' => $this->name,
                 'parametersLength' => $parametersCount,
                 'path' => $this->path,
-                'resource' => $controller,
-                'roles' => $this->getRoles(controller: $controller)
+                'resource' => $controller
             ];
 
             return $arrayMerged;
@@ -135,8 +110,7 @@ class Route implements iRoute
             'name' => $this->name,
             'parametersLength' => 0,
             'path' => $this->path,
-            'resource' => $controller,
-            'roles' => $this->getRoles(controller: $controller)
+            'resource' => $controller
         ]];
     }
 
