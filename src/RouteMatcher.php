@@ -63,11 +63,11 @@ class RouteMatcher implements iRouteMatcher
             }
         }
 
-        $routeCandidatesFiltered = array_filter(array: $routeCandidates, callback: function (array $routeCandidate) use ($minRouteCandidateParametersLength): bool {
+        $routeCandidatesFiltered = array_values(array_filter(array: $routeCandidates, callback: function (array $routeCandidate) use ($minRouteCandidateParametersLength): bool {
             $routeCandidateParametersLength = $routeCandidate['parametersLength'];
 
             return $minRouteCandidateParametersLength === $routeCandidateParametersLength;
-        });
+        }));
 
         $routeCandidatesFilteredLength = count($routeCandidatesFiltered);
 
