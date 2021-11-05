@@ -13,15 +13,15 @@
   ],
   "require": {
     "php": ">=8.0.0",
-    "fluence-prototype/auth": "^2.0",
-    "fluence-prototype/cache": "^2.0",
-    "fluence-prototype/filesystem": "^2.0",
-    "fluence-prototype/http": "^2.0"
+    "fluence-prototype/auth": "^3.0",
+    "fluence-prototype/cache": "^3.0",
+    "fluence-prototype/filesystem": "^3.0",
+    "fluence-prototype/http": "^3.0"
   },
   "autoload": {
     "psr-4": {
       "FluencePrototype\\Router\\": "src/"
     }
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "dev"
 }
