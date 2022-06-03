@@ -183,8 +183,12 @@ class RouteMatcher implements iRouteMatcher
 
                     $currentUrl = HttpUrl::createFromCurrentUrl();
 
+                    if (!$routeInformationArray['isFile'] && $routeInformationArray['isFile'] !== '') {
+                        $currentUrl->setPath($currentUrl->getPath() . '/');
+                    }
+
                     header(header: 'HTTP/1.1 301 Moved Permanently');
-                    header(header: 'Location: ' . $currentUrl . (!$routeInformationArray['isFile'] && $routeInformationArray['isFile'] !== '' ? '/' : ''));
+                    header(header: 'Location: ' . $currentUrl);
 
                     exit;
                 }
